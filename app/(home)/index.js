@@ -4,6 +4,7 @@ import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 
 const index = () => {
@@ -279,6 +280,128 @@ const index = () => {
                 <Entypo name="chevron-right" size={24} color="black" />
               </View>
             </Pressable>
+          </View>
+          <View
+            style={{
+              marginTop: 20,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#f79d00",
+                borderRadius: 6,
+                padding: 12,
+                alignItems: "center",
+                justifyContent: "center",
+                flex: 1,
+              }}
+            >
+              <View
+                style={{
+                  width: 35,
+                  height: 35,
+                  borderRadius: 7,
+                  backgroundColor: "white",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="guy-fawkes-mask"
+                  size={24}
+                  color="black"
+                />
+              </View>
+              <Text style={{ marginTop: 7 }}>Attendance Criteria</Text>
+            </View>
+            <View
+              style={{
+                backgroundColor: "#abcaba",
+                borderRadius: 6,
+                padding: 12,
+                alignItems: "center",
+                justifyContent: "center",
+                flex: 1,
+              }}
+            >
+              <View
+                style={{
+                  width: 35,
+                  height: 35,
+                  borderRadius: 7,
+                  backgroundColor: "white",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Feather name="bar-chart" size={24} color="black" />
+              </View>
+              <Text style={{ marginTop: 7 }}>Increased Workflow</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              marginTop: 20,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#d3cce3",
+                borderRadius: 6,
+                padding: 12,
+                alignItems: "center",
+                justifyContent: "center",
+                flex: 1,
+              }}
+            >
+              <View
+                style={{
+                  width: 35,
+                  height: 35,
+                  borderRadius: 7,
+                  backgroundColor: "white",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="guy-fawkes-mask"
+                  size={24}
+                  color="black"
+                />
+              </View>
+              <Text style={{ marginTop: 7 }}>Cost Savings</Text>
+            </View>
+            <View
+              style={{
+                backgroundColor: "#bdc3c7",
+                borderRadius: 6,
+                padding: 12,
+                alignItems: "center",
+                justifyContent: "center",
+                flex: 1,
+              }}
+            >
+              <View
+                style={{
+                  width: 35,
+                  height: 35,
+                  borderRadius: 7,
+                  backgroundColor: "white",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Feather name="bar-chart" size={24} color="black" />
+              </View>
+              <Text style={{ marginTop: 7 }}>Employee Performance</Text>
+            </View>
           </View>
         </View>
       </LinearGradient>
