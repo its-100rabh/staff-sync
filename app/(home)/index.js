@@ -6,8 +6,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
+import { useRouter } from "expo-router";
 
 const index = () => {
+  const router = useRouter();
   return (
     <ScrollView>
       <LinearGradient colors={["#7E7FD5", "#E9E4F0"]} style={{ flex: 1 }}>
@@ -35,6 +37,7 @@ const index = () => {
             }}
           >
             <Pressable
+              onPress={() => router.push("/(home)/employees")}
               style={{
                 backgroundColor: "#D3CCE3",
                 padding: 12,
