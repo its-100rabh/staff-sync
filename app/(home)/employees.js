@@ -7,9 +7,12 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import axios from "axios";
+import { useRouter } from "expo-router";
 
 const employees = () => {
-  const { employees, setEmployees } = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [input, setInput] = useState("");
+  const router = useRouter();
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
@@ -50,9 +53,26 @@ const employees = () => {
           }}
         >
           <AntDesign name="search1" size={24} color="black" />
-          <TextInput placeholder="Search" />
+          <TextInput
+            value={input}
+            onChangeText={(text) => setInput(text)}
+            style={{ flex: 1 }}
+            placeholder="Search"
+          />
+
+          {employees.length > 0 && (
+            <View>
+              <Pressable>
+                <AntDesign name="pluscircle" size={24} color="black" />
+              </Pressable>
+            </View>
+          )}
         </Pressable>
       </View>
+
+      <Pressable onPress={() => router.push("/(home)/adddetails")}>
+        <AntDesign name="pluscircle" size={24} color="#0072b1" />
+      </Pressable>
     </View>
   );
 };
