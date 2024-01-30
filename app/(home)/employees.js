@@ -16,7 +16,7 @@ const employees = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/employees");
+        const response = await axios.get("http://192.168.16.105:8081/employees");
         setEmployees(response.data);
       } catch (error) {
         console.log("error: ", error);

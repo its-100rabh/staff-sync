@@ -3,7 +3,7 @@ const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
-const port = 8000;
+const port = 8081;
 const cors = require("cors");
 app.use(cors());
 
@@ -23,7 +23,7 @@ mongoose
   });
 
 app.listen(port, () => {
-  console.log("server is running on port 8000");
+  console.log("server is running on port 8081");
 });
 
 const Employee = require("./models/employee");
