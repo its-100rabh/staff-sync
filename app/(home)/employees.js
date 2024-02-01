@@ -1,13 +1,10 @@
 import { Pressable, StyleSheet, Text, View, TextInput } from "react-native";
 import React, { useEffect, useState } from "react";
-import {
-  AntDesign,
-  Ionicons,
-  Feather,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
 import axios from "axios";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import SearchResults from "../../components/SearchResults";
 
 const employees = () => {
   const [employees, setEmployees] = useState([]);
@@ -19,15 +16,14 @@ const employees = () => {
         const response = await axios.get("http://192.168.16.105:8081/employees");
         setEmployees(response.data);
       } catch (error) {
-        console.log("error: ", error);
+        console.log("error fetching employee data", error);
       }
     };
     fetchEmployeeData();
   }, []);
   console.log(employees);
-
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1, backgroundColor: "white" , paddingTop:20 }}>
       <View
         style={{
           flexDirection: "row",
@@ -36,6 +32,7 @@ const employees = () => {
         }}
       >
         <Ionicons
+          onPress={() => router.back()}
           style={{ marginLeft: 10 }}
           name="arrow-back"
           size={24}
@@ -48,11 +45,17 @@ const employees = () => {
             marginHorizontal: 7,
             gap: 10,
             backgroundColor: "white",
-            borderRadius: 4,
+            borderRadius: 3,
             height: 40,
+            flex: 1,
           }}
         >
-          <AntDesign name="search1" size={24} color="black" />
+          <AntDesign
+            style={{ marginLeft: 10 }}
+            name="search1"
+            size={20}
+            color="black"
+          />
           <TextInput
             value={input}
             onChangeText={(text) => setInput(text)}
@@ -62,17 +65,32 @@ const employees = () => {
 
           {employees.length > 0 && (
             <View>
-              <Pressable>
-                <AntDesign name="pluscircle" size={24} color="black" />
+              <Pressable onPress={() => router.push("/(home)/adddetails")}>
+                <AntDesign name="pluscircle" size={24} color="#0072b1" />
               </Pressable>
             </View>
           )}
         </Pressable>
       </View>
 
-      <Pressable onPress={() => router.push("/(home)/adddetails")}>
-        <AntDesign name="pluscircle" size={24} color="#0072b1" />
-      </Pressable>
+      {employees.length > 0 ? (
+        <SearchResults data={employees} input={input} setInput={setInput} />
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text>No Data</Text>
+          <Text>Press on the plus button and add your Employee</Text>
+          <Pressable onPress={() => router.push("/(home)/adddetails")}>
+            <AntDesign
+              style={{ marginTop: 30 }}
+              name="pluscircle"
+              size={18}
+              color="black"
+            />
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 };
