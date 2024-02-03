@@ -74,21 +74,26 @@ app.get("/employees", async (req, res) => {
     const employees = await Employee.find();
     res.status(200).json(employees);
   } catch (error) {
-    res.status(500).json({ message: "Failed to retrieve the employee" });
+    res.status(500).json({ message: "Failed to retrieve the employees" });
   }
 });
 
 app.post("/attendance", async (req, res) => {
   try {
+    console.log("Request body:", req.body);
+
     const { employeeId, employeeName, date, status } = req.body;
+
     const existingAttendance = await Attendance.findOne({ employeeId, date });
+
+    console.log("Existing Attendance:", existingAttendance);
 
     if (existingAttendance) {
       existingAttendance.status = status;
       await existingAttendance.save();
       res.status(200).json(existingAttendance);
     } else {
-      const newAttendance = newAttendance({
+      const newAttendance = new Attendance({
         employeeId,
         employeeName,
         date,
@@ -98,29 +103,36 @@ app.post("/attendance", async (req, res) => {
       res.status(200).json(newAttendance);
     }
   } catch (error) {
-    res.status(500).json({ message: "Error: Submitting the Attendance" });
+    console.error("Error submitting attendance:", error);
+    res.status(500).json({ message: "Error submitting attendance" });
   }
 });
 
 app.get("/attendance", async (req, res) => {
   try {
     const { date } = req.query;
+
+    // Find attendance records for the specified date
     const attendanceData = await Attendance.find({ date: date });
+
     res.status(200).json(attendanceData);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching attendance" });
+    res.status(500).json({ message: "Error fetching attendance data" });
   }
 });
 
 app.get("/attendance-report-all-employees", async (req, res) => {
   try {
     const { month, year } = req.query;
-    console.log("query params:", month, year);
+
+    console.log("Query parameters:", month, year);
+    // Calculate the start and end dates for the selected month and year
     const startDate = moment(`${year}-${month}-01`, "YYYY-MM-DD")
       .startOf("month")
       .toDate();
     const endDate = moment(startDate).endOf("month").toDate();
 
+    // Aggregate attendance data for all employees and date range
     const report = await Attendance.aggregate([
       {
         $match: {
