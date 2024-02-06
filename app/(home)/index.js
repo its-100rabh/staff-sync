@@ -146,7 +146,7 @@ const index = () => {
                 <Entypo name="chevron-right" size={24} color="black" />
               </View>
             </Pressable>
-            <Pressable
+            <Pressable onPress={()=>router.push("/(home)/summary")}
               style={{
                 backgroundColor: "#BE93C5",
                 borderRadius: 6,
